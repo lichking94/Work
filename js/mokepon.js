@@ -1,6 +1,6 @@
 let ataqueJugador;
 let ataqueEnemigo;
-
+    
 function iniciarJuego() {
   let botonMascota = document.getElementById("boton-mascota");
   botonMascota.addEventListener("click", seleccionarMascotaJugador);
@@ -51,18 +51,18 @@ function seleccionarMascotaJugador() {
 }
 
 function seleccionarMascotaEnemigo() {
-  let mascotaEnemigo = aleatorio(1, 6);
+  let mascotaAletoria = aleatorio(1, 6);
   let spanMascotaEnemigo = document.getElementById("mascota-enemigo");
 
-  if (mascotaEnemigo == 1) {
+  if (mascotaAletoria == 1) {
     spanMascotaEnemigo.innerHTML = "caliope";
-  } else if (mascotaEnemigo == 2) {
+  } else if (mascotaAletoria == 2) {
     spanMascotaEnemigo.innerHTML = "rocoso";
-  } else if (mascotaEnemigo == 3) {
+  } else if (mascotaAletoria == 3) {
     spanMascotaEnemigo.innerHTML = "firedar";
-  } else if (mascotaEnemigo == 4) {
+  } else if (mascotaAletoria == 4) {
     spanMascotaEnemigo.innerHTML = "vulcano";
-  } else if (mascotaEnemigo == 5) {
+  } else if (mascotaAletoria == 5) {
     spanMascotaEnemigo.innerHTML = "pantano";
   } else {
     spanMascotaEnemigo.innerHTML = "rocmag";
@@ -91,7 +91,7 @@ function ataqueAire() {
 
 function ataqueAleatorioEnemigo() {
   let ataqueAleatorio = aleatorio(1, 4);
-  console.log(ataqueAleatorio);
+  
 
   if (ataqueAleatorio == 1) {
     console.log("fuego");
