@@ -1,5 +1,9 @@
 let ataqueJugador;
 let ataqueEnemigo;
+let resultado;
+let vidasJugador = 6
+let vidasEnemigo = 6
+
     
 function iniciarJuego() {
   let botonMascota = document.getElementById("boton-mascota");
@@ -91,7 +95,6 @@ function ataqueAire() {
 
 function ataqueAleatorioEnemigo() {
   let ataqueAleatorio = aleatorio(1, 4);
-  
 
   if (ataqueAleatorio == 1) {
     console.log("fuego");
@@ -106,7 +109,49 @@ function ataqueAleatorioEnemigo() {
     console.log("aire");
     ataqueEnemigo = "AIRE";
   }
+
+    batalla()
 }
+
+
+function batalla(){
+    //let spanVidasJugador = document.getElementById("vida-jugador")
+    //let spanVidasEnemigo = document.getElementById("vida-enemigo")
+     
+    if (ataqueJugador == ataqueEnemigo) {
+        mensajesglobal("EMPATE")
+  } else if (ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA")
+  {
+        mensajesglobal("GANASTE")
+  } else if (ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO") {
+        mensajesglobal("GANASTE")
+  } else if (ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA") {
+        mensajesglobal("GANASTE")
+  }  else if (ataqueJugador == "AIRE" && ataqueEnemigo == "FUEGO") {
+         mensajesglobal("GANASTE")
+  } else if (ataqueJugador == "TIERRA" && ataqueEnemigo == "AIRE") {
+        mensajesglobal("GANASTE")
+  }
+    else {
+        mensajesglobal("PERDISTE")
+        //vidasJugador--
+        //spanVidasJugador.innerHTML = vidasJugador   
+  } 
+     
+}
+
+
+
+function mensajesglobal(resultado){
+    let sectionMensajes = document.getElementById('mensajes')
+
+    let mensaje = document.createElement('p')
+    mensaje.innerHTML = 'Tu mascota ataco con ' + ataqueJugador +  ', la mascota del enemigo ataco con ' + ataqueEnemigo + ' ' + resultado 
+
+    sectionMensajes.appendChild(mensaje)
+    
+}
+
 
 function aleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
