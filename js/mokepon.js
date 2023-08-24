@@ -3,6 +3,8 @@ let ataqueEnemigo;
 let resultado;
 let vidasJugador = 6
 let vidasEnemigo = 6
+let victoria = 0
+let derrota = 0
 
     
 function iniciarJuego() {
@@ -20,6 +22,9 @@ function iniciarJuego() {
 
   let botonAire = document.getElementById("boton-aire");
   botonAire.addEventListener("click", ataqueAire);
+
+  let botonReiniciar = document.getElementById('reiniciar')
+  botonReiniciar.addEventListener('click',recargarJuego)
 }
 
 function seleccionarMascotaJugador() {
@@ -115,31 +120,59 @@ function ataqueAleatorioEnemigo() {
 
 
 function batalla(){
-    //let spanVidasJugador = document.getElementById("vida-jugador")
-    //let spanVidasEnemigo = document.getElementById("vida-enemigo")
+    let spanVidasJugador = document.getElementById("vida-jugador")
+    let spanVidasEnemigo = document.getElementById("vida-enemigo")
      
     if (ataqueJugador == ataqueEnemigo) {
         mensajesglobal("EMPATE")
   } else if (ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA")
   {
         mensajesglobal("GANASTE")
+        vidasEnemigo--
+        console.log(vidasEnemigo)
+        spanVidasEnemigo.innerHTML = vidasEnemigo
   } else if (ataqueJugador == "AGUA" && ataqueEnemigo == "FUEGO") {
         mensajesglobal("GANASTE")
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
   } else if (ataqueJugador == "TIERRA" && ataqueEnemigo == "AGUA") {
         mensajesglobal("GANASTE")
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
   }  else if (ataqueJugador == "AIRE" && ataqueEnemigo == "FUEGO") {
          mensajesglobal("GANASTE")
+         vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
   } else if (ataqueJugador == "TIERRA" && ataqueEnemigo == "AIRE") {
         mensajesglobal("GANASTE")
+        vidasEnemigo--
+        spanVidasEnemigo.innerHTML = vidasEnemigo
   }
     else {
         mensajesglobal("PERDISTE")
-        //vidasJugador--
-        //spanVidasJugador.innerHTML = vidasJugador   
+        vidasJugador--
+        console.log(vidasJugador)
+        spanVidasJugador.innerHTML = vidasJugador 
+        derrota++
+        console.log(derrota)
+          
   } 
-     
+     // REVISAR LAS VIDAS 
+     revisarvidas()
 }
 
+function revisarvidas(){
+    if(vidasEnemigo == 0 )
+    {
+       mensajeFinal("FELICIDADES GANASTE ")
+    }
+    else if(vidasJugador == 0)
+    {
+        //vidasJugador - derrota
+        mensajeFinal("LO SIENTO PERDISTE ")
+    }
+
+} 
 
 
 function mensajesglobal(resultado){
@@ -152,6 +185,30 @@ function mensajesglobal(resultado){
     
 }
 
+function mensajeFinal(resultadoFinal){
+    let sectionMensajes = document.getElementById('mensajes')
+
+    let mensaje = document.createElement('p')
+    mensaje.innerHTML = resultadoFinal
+
+    sectionMensajes.appendChild(mensaje)
+    
+    let botonFuego = document.getElementById("boton-fuego");
+    botonFuego.disabled = true
+
+    let botonTierra = document.getElementById("boton-tierra");
+    botonTierra.disabled = true
+
+    let botonAgua = document.getElementById("boton-agua");
+    botonAgua.disabled = true
+
+    let botonAire = document.getElementById("boton-aire");
+    botonAire.disabled = true
+}
+
+function recargarJuego(){
+    location.reload()
+}
 
 function aleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
