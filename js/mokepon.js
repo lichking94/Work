@@ -8,6 +8,13 @@ let derrota = 0
 
     
 function iniciarJuego() {
+    let reiniciarjuego = document.getElementById('reiniciar')
+    reiniciarjuego.style.display = 'none' 
+    
+  let sectionSeleccionarAtaque =  document.getElementById('ataque')
+  sectionSeleccionarAtaque.style.display = 'none'
+
+
   let botonMascota = document.getElementById("boton-mascota");
   botonMascota.addEventListener("click", seleccionarMascotaJugador);
 
@@ -27,15 +34,24 @@ function iniciarJuego() {
   botonReiniciar.addEventListener('click',recargarJuego)
 }
 
-function seleccionarMascotaJugador() {
-  let animal1 = document.getElementById("caliope");
-  let animal2 = document.getElementById("rocoso");
-  let animal3 = document.getElementById("firedar");
-  let animal4 = document.getElementById("vulcano");
-  let animal5 = document.getElementById("pantano");
-  let animal6 = document.getElementById("rocmag");
-  let spanMascotaJugador = document.getElementById("mascota-jugador");
-  let animal = 1;
+function seleccionarMascotaJugador() { 
+
+    let setcionSeleccionarMascota = document.getElementById('mascota')
+    setcionSeleccionarMascota.style.display = 'none'     
+
+    let sectionSeleccionarAtaque =  document.getElementById('ataque')
+    sectionSeleccionarAtaque.style.display = 'block'
+    
+    let animal1 = document.getElementById("caliope");
+    let animal2 = document.getElementById("rocoso");
+    let animal3 = document.getElementById("firedar");
+    let animal4 = document.getElementById("vulcano");
+    let animal5 = document.getElementById("pantano");
+    let animal6 = document.getElementById("rocmag");
+    let spanMascotaJugador = document.getElementById("mascota-jugador");
+    let animal = 1;
+
+
 
   if (animal1.checked) {
     spanMascotaJugador.innerHTML = "caliope";
@@ -76,7 +92,12 @@ function seleccionarMascotaEnemigo() {
   } else {
     spanMascotaEnemigo.innerHTML = "rocmag";
   }
+
+
+
 }
+
+
 
 function ataqueFuego() {
   ataqueJugador = "FUEGO";
@@ -120,6 +141,8 @@ function ataqueAleatorioEnemigo() {
 
 
 function batalla(){
+    
+
     let spanVidasJugador = document.getElementById("vida-jugador")
     let spanVidasEnemigo = document.getElementById("vida-enemigo")
      
@@ -186,6 +209,9 @@ function mensajesglobal(resultado){
 }
 
 function mensajeFinal(resultadoFinal){
+    let reiniciarjuego = document.getElementById('reiniciar')
+    reiniciarjuego.style.display = 'block'
+
     let sectionMensajes = document.getElementById('mensajes')
 
     let mensaje = document.createElement('p')
