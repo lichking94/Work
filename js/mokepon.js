@@ -199,12 +199,23 @@ function revisarvidas(){
 
 
 function mensajesglobal(resultado){
-    let sectionMensajes = document.getElementById('mensajes')
+    let sectionMensajes = document.getElementById('resultado')
+    let ataqueDelJugador = document.getElementById('ataque-jugador')
+    let ataquesDelEnemigo = document.getElementById('ataque-enemigo')
 
-    let mensaje = document.createElement('p')
-    mensaje.innerHTML = 'Tu mascota ataco con ' + ataqueJugador +  ', la mascota del enemigo ataco con ' + ataqueEnemigo + ' ' + resultado 
+    //let notificacion = document.createElement('p')
+    let nuevoAtaqueDelJugador = document.createElement('p')
+    let nuevoAtaqueDelEnemigo = document.createElement('p')
 
-    sectionMensajes.appendChild(mensaje)
+    sectionMensajes.innerHTML = resultado
+    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
+    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
+
+    //let mensaje = document.createElement('p')
+    //mensaje.innerHTML = 'Tu mascota ataco con ' + ataqueJugador +  ', la mascota del enemigo ataco con ' + ataqueEnemigo + ' ' + resultado 
+
+    ataqueDelJugador.appendChild(nuevoAtaqueDelJugador)
+    ataquesDelEnemigo.appendChild(nuevoAtaqueDelEnemigo)
     
 }
 
@@ -212,12 +223,12 @@ function mensajeFinal(resultadoFinal){
     let reiniciarjuego = document.getElementById('reiniciar')
     reiniciarjuego.style.display = 'block'
 
-    let sectionMensajes = document.getElementById('mensajes')
+    let sectionMensajes = document.getElementById('resultado')
 
-    let mensaje = document.createElement('p')
-    mensaje.innerHTML = resultadoFinal
+    //let mensaje = document.createElement('p')
+    sectionMensajes.innerHTML = resultadoFinal
 
-    sectionMensajes.appendChild(mensaje)
+    //sectionMensajes.appendChild(mensaje)
     
     let botonFuego = document.getElementById("boton-fuego");
     botonFuego.disabled = true
