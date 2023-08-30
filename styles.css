@@ -65,8 +65,8 @@ body{
     width: 100px;
     height: 50px;
     border-radius: 20px;
-    background-color: #27374D;
-    border: 2px solid white;
+    background-color: transparent;
+    border: 2none;
     color: whitesmoke;
     font-family: 'Inter', sans-serif;
     margin: 30px 20px 10px 5px;
@@ -109,6 +109,7 @@ body{
     justify-content: center;
     flex-direction: column;
     align-items: center;
+    font-family: 'Roboto Mono', monospace;
     
 }
 
@@ -117,7 +118,6 @@ body{
     cursor: pointer;
     color: azure;
     background-color: transparent;
-    font-family: 'Roboto Mono', monospace;
     border-radius: 10px solid #0C356A;
     
 }

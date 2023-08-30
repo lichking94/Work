@@ -17,10 +17,13 @@
 
     <div class="tarjetas">
 
-      <label class="tarjeta-mascota"  for="caliope" >
-        <p>caliope</p>
-        <img src="/mokepon/assets/caliope.jpg" alt="">
-      </label>
+      <div id="mascota1">
+        <label class="tarjeta-mascota"  for="caliope" >
+          <p>caliope</p>
+          <img src="/mokepon/assets/caliope.jpg" alt="">
+        </label>
+      </div>
+      
       <input type="radio" id="caliope" name="mascota" />
   
       <label class="tarjeta-mascota" for="rocoso">
@@ -91,10 +94,20 @@
 
 
       <div id="mascota-ataque">
-        <div id="ataque-jugador" ></div>
-        <div id="ataque-enemigo"></div>
-        <p>Tu mascota es <span id="mascota-jugador"></span> tiene <span id="vida-jugador">6</span> vidas</p>
-        <p>La mascota del oponente es <span id="mascota-enemigo"></span> tiene <span id="vida-enemigo">6</span> vidas</p>
+
+        <div>
+            <p id="vida-jugador">6</p>
+            <p id="mascota-jugador"></p>
+            <div id="ataque-jugador"></div>
+            
+        </div>
+        
+        <div>
+          <p id="vida-enemigo">6</p>
+          <p id="mascota-enemigo"></p>
+          <div id="ataque-enemigo"></div>
+        </div>
+        
 
       </div>
      
