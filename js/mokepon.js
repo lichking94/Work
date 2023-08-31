@@ -6,48 +6,87 @@ let vidasEnemigo = 6
 let victoria = 0
 let derrota = 0
 
- hola
+// Primer conjunto de variables
+let reiniciarjuego = document.getElementById('reiniciar')
+let sectionSeleccionarAtaque =  document.getElementById('ataque')
+let botonMascota = document.getElementById("boton-mascota");
+let botonFuego = document.getElementById("boton-fuego");
+let botonTierra = document.getElementById("boton-tierra");
+let botonAgua = document.getElementById("boton-agua");
+let botonAire = document.getElementById("boton-aire");
+let botonReiniciar = document.getElementById('reiniciar')
+
+// Segundo conjunto de variables
+
+let setcionSeleccionarMascota = document.getElementById('mascota')
+//let sectionSeleccionarAtaque =  document.getElementById('ataque')
+let animal1 = document.getElementById("caliope");
+let animal2 = document.getElementById("rocoso");
+let animal3 = document.getElementById("firedar");
+let animal4 = document.getElementById("vulcano");
+let animal5 = document.getElementById("pantano");
+let animal6 = document.getElementById("rocmag");
+let spanMascotaJugador = document.getElementById("mascota-jugador");
+
+//Tercer conjunto de variables
+let spanMascotaEnemigo = document.getElementById("mascota-enemigo");
 
 
+// Cuarto conjunto de variables
+let spanVidasJugador = document.getElementById("vida-jugador")
+let spanVidasEnemigo = document.getElementById("vida-enemigo")
+
+//Quinto conjunto de varialbes
+let sectionMensajes = document.getElementById('resultado')
+let ataqueDelJugador = document.getElementById('ataque-jugador')
+let ataquesDelEnemigo = document.getElementById('ataque-enemigo')
+
+
+
+//nos debemos llevar varialbes que se repitan 
 function iniciarJuego() {
+    //let reiniciarjuego = document.getElementById('reiniciar') se repite
+    reiniciarjuego.style.display = 'none' 
     
-  let botonMascota = document.getElementById("boton-mascota");
+  //let sectionSeleccionarAtaque =  document.getElementById('ataque') se repite
+  sectionSeleccionarAtaque.style.display = 'none'
+
+  //let botonMascota = document.getElementById("boton-mascota"); se repite
   botonMascota.addEventListener("click", seleccionarMascotaJugador);
 
-  let botonFuego = document.getElementById("boton-fuego");
+  //let botonFuego = document.getElementById("boton-fuego"); se repite 
   botonFuego.addEventListener("click", ataqueFuego);
 
-  let botonTierra = document.getElementById("boton-tierra");
+ // let botonTierra = document.getElementById("boton-tierra");
   botonTierra.addEventListener("click", ataqueTierra);
 
-  let botonAgua = document.getElementById("boton-agua");
+  //let botonAgua = document.getElementById("boton-agua");
   botonAgua.addEventListener("click", ataqueAgua);
 
-  let botonAire = document.getElementById("boton-aire");
+ //let botonAire = document.getElementById("boton-aire");
   botonAire.addEventListener("click", ataqueAire);
 
-  let botonReiniciar = document.getElementById('reiniciar')
+ // let botonReiniciar = document.getElementById('reiniciar')
   botonReiniciar.addEventListener('click',recargarJuego)
 }
 
 function seleccionarMascotaJugador() { 
 
-    let setcionSeleccionarMascota = document.getElementById('mascota')
+   // let setcionSeleccionarMascota = document.getElementById('mascota')
     setcionSeleccionarMascota.style.display = 'none'     
 
-    let sectionSeleccionarAtaque =  document.getElementById('ataque')
+     // let sectionSeleccionarAtaque =  document.getElementById('ataque')
     sectionSeleccionarAtaque.style.display = 'flex'
     
-    let animal1 = document.getElementById("caliope");
-    let animal2 = document.getElementById("rocoso");
-    let animal3 = document.getElementById("firedar");
-    let animal4 = document.getElementById("vulcano");
-    let animal5 = document.getElementById("pantano");
-    let animal6 = document.getElementById("rocmag");
-    let spanMascotaJugador = document.getElementById("mascota-jugador");
+    //let animal1 = document.getElementById("caliope");
+    //let animal2 = document.getElementById("rocoso");
+    //let animal3 = document.getElementById("firedar");
+    //let animal4 = document.getElementById("vulcano");
+    //let animal5 = document.getElementById("pantano");
+    //let animal6 = document.getElementById("rocmag");
+    //let spanMascotaJugador = document.getElementById("mascota-jugador");
     let animal = 1;
     let imagen = document.createElement("img");
-
 
   if (animal1.checked) {
     spanMascotaJugador.innerHTML = "caliope";
@@ -98,7 +137,7 @@ function seleccionarMascotaJugador() {
 
 function seleccionarMascotaEnemigo() {
   let mascotaAletoria = aleatorio(1, 6);
-  let spanMascotaEnemigo = document.getElementById("mascota-enemigo");
+  
   let imagen = document.createElement("img");
 
   if (mascotaAletoria == 1) {
@@ -138,9 +177,6 @@ function seleccionarMascotaEnemigo() {
     imagen.height = 300;
     document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   }
-
- 
-
 }
 
 
@@ -189,8 +225,8 @@ function ataqueAleatorioEnemigo() {
 function batalla(){
     
 
-    let spanVidasJugador = document.getElementById("vida-jugador")
-    let spanVidasEnemigo = document.getElementById("vida-enemigo")
+   // let spanVidasJugador = document.getElementById("vida-jugador")
+  //  let spanVidasEnemigo = document.getElementById("vida-enemigo")
      
     if (ataqueJugador == ataqueEnemigo) {
         mensajesglobal("EMPATE")
@@ -227,22 +263,8 @@ function batalla(){
           
   } 
      // REVISAR LAS VIDAS 
-     revisarvidas()
-     //VISUALIZAR MASCOTA
-     //visualizarmascota()
+     revisarvidas()     
 }
-
-/*
-function visualizarmascota(){
-  let mascotas1 = document.getElementById("mascota1")
-  let imagen = document.createElement("img");
-
-  if (animal1 == true){
-    imagen.src = "/mokepon/assets/caliope.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
-  }
-}*/
-
 
 function revisarvidas(){
     if(vidasEnemigo == 0 )
@@ -259,10 +281,7 @@ function revisarvidas(){
 
 
 function mensajesglobal(resultado){
-    let sectionMensajes = document.getElementById('resultado')
-    let ataqueDelJugador = document.getElementById('ataque-jugador')
-    let ataquesDelEnemigo = document.getElementById('ataque-enemigo')
-
+ 
     //let notificacion = document.createElement('p')
     let nuevoAtaqueDelJugador = document.createElement('p')
     let nuevoAtaqueDelEnemigo = document.createElement('p')
@@ -280,9 +299,6 @@ function mensajesglobal(resultado){
 }
 
 function mensajeFinal(resultadoFinal){
-    let reiniciarjuego = document.getElementById('reiniciar')
-    reiniciarjuego.style.display = 'block'
-
     let sectionMensajes = document.getElementById('resultado')
 
     //let mensaje = document.createElement('p')
@@ -301,6 +317,10 @@ function mensajeFinal(resultadoFinal){
 
     let botonAire = document.getElementById("boton-aire");
     botonAire.disabled = true
+
+    let reiniciarjuego = document.getElementById('reiniciar')
+    reiniciarjuego.style.display = 'block'
+
 }
 
 function recargarJuego(){
