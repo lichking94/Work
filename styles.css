@@ -40,6 +40,8 @@ body{
 .tarjetas{
     display: flex;
     gap: 10px;
+    justify-content: space-around;
+    flex-wrap: wrap;
 }
 
 .tarjeta-mascota {
@@ -133,6 +135,7 @@ body{
    display: grid;
    grid-template-columns: 400px 500px;
    justify-items: center; 
+ 
 }
 
 
