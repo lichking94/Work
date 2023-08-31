@@ -56,27 +56,39 @@ function seleccionarMascotaJugador() {
   if (animal1.checked) {
     spanMascotaJugador.innerHTML = "caliope";
     imagen.src = "/mokepon/assets/caliope.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal2.checked) {
     spanMascotaJugador.innerHTML = "rocoso";
+    imagen.width = 300;
+    imagen.height = 300;
     imagen.src = "/mokepon/assets/rocoso.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
+    document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal3.checked) {
     spanMascotaJugador.innerHTML = "firedar";
     imagen.src = "/mokepon/assets/firedar.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal4.checked) {
     spanMascotaJugador.innerHTML = "vulcano";
     imagen.src = "/mokepon/assets/vulcano.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal5.checked) {
     spanMascotaJugador.innerHTML = "pantano";
     imagen.src = "/mokepon/assets/pantano.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal6.checked) {
     spanMascotaJugador.innerHTML = "rocmag";
     imagen.src = "/mokepon/assets/rocmag.jpg";
-    document.getElementById("mascota-jugador").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else {
     alert("No Seleccionaste a ninguna mascota");
     animal = 0;
@@ -96,27 +108,39 @@ function seleccionarMascotaEnemigo() {
   if (mascotaAletoria == 1) {
     spanMascotaEnemigo.innerHTML = "caliope";
     imagen.src = "/mokepon/assets/caliope.jpg";
-    document.getElementById("mascota-enemigo").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   } else if (mascotaAletoria == 2) {
     spanMascotaEnemigo.innerHTML = "rocoso";
     imagen.src = " /mokepon/assets/rocoso.jpg";
-    document.getElementById("mascota-enemigo").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   } else if (mascotaAletoria == 3) {
     spanMascotaEnemigo.innerHTML = "firedar";
     imagen.src = "/mokepon/assets/firedar.jpg";
-    document.getElementById("mascota-enemigo").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   } else if (mascotaAletoria == 4) {
     spanMascotaEnemigo.innerHTML = "vulcano";
     imagen.src = "/mokepon/assets/vulcano.jpg";
-    document.getElementById("mascota-enemigo").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   } else if (mascotaAletoria == 5) {
     spanMascotaEnemigo.innerHTML = "pantano";
     imagen.src = "/mokepon/assets/pantano.jpg";
-    document.getElementById("mascota-enemigo").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   } else {
     spanMascotaEnemigo.innerHTML = "rocmag";
     imagen.src = "/mokepon/assets/rocmag.jpg";
-    document.getElementById("mascota-enemigo").appendChild(imagen);
+    imagen.width = 300;
+    imagen.height = 300;
+    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   }
 
  
@@ -290,5 +314,7 @@ function recargarJuego(){
 function aleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
+
+
 
 window.addEventListener("load", iniciarJuego);

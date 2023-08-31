@@ -4,9 +4,12 @@
 	box-sizing: border-box
 }*/
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300&family=Roboto+Mono:wght@100&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Inter:wght@300&family=Roboto+Mono:wght@100&display=swap');
+
 body{
 
+    font-family: 'Black Ops One', cursive;
+    font-family: 'Inter', sans-serif;
     font-family: 'Roboto Mono', monospace;
     /*background-color: #526D82;*/
     background-image: url(https://i.pinimg.com/564x/91/d9/c0/91d9c08de3903e7dccc498b8ab205eab.jpg);
@@ -74,8 +77,8 @@ body{
 }
 
 #ataque{
-    font-family: 'Roboto Mono', monospace;
-    color: whitesmoke;
+    font-family: 'Black Ops One', cursive;
+    color: rgb(192, 176, 176);
     flex-direction: column;
     align-items: center;
 
@@ -95,10 +98,11 @@ body{
 
 }
 
-
-#mascota-ataque{
-    color: azure;
+#resultado{
+    font-family: 'Black Ops One', cursive;
+    color: rgb(192, 176, 176)
 }
+
 
 #mensajes{
     width: 280px;
@@ -124,14 +128,15 @@ body{
 
 
 
-/*
-#ataque-jugador{
-    display: flex;
-  
+
+.ataques{
+   display: grid;
+   grid-template-columns: 400px 500px;
+   justify-items: center; 
 }
 
 
-*/
+
 
 input{
     display: none;
