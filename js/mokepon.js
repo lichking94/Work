@@ -6,15 +6,11 @@ let vidasEnemigo = 6
 let victoria = 0
 let derrota = 0
 
-    
+ hola
+
+
 function iniciarJuego() {
-    let reiniciarjuego = document.getElementById('reiniciar')
-    reiniciarjuego.style.display = 'none' 
     
-  let sectionSeleccionarAtaque =  document.getElementById('ataque')
-  sectionSeleccionarAtaque.style.display = 'none'
-
-
   let botonMascota = document.getElementById("boton-mascota");
   botonMascota.addEventListener("click", seleccionarMascotaJugador);
 
