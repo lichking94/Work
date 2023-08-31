@@ -44,10 +44,11 @@ body{
     gap: 10px;
     justify-content: space-around;
     flex-wrap: wrap;
+    align-items: center;
 }
 
 .tarjeta-mascota {
-    width: 180px;
+    width: 200px;
     height: 100px;
     padding: 10px;
     box-sizing: border-box;
@@ -59,6 +60,7 @@ body{
     align-content: center;
     align-items: center;
     box-shadow: 0 6px 6px rgba(0, 0, 0, 0.6);
+    cursor: pointer;
     
 }
 .tarjeta-mascota img{
@@ -153,5 +155,12 @@ body{
 }
 
 input{
-    display: none;
+    display: none; 
+}
+
+input:checked + label{
+   
+ 
+   background-image: url("/mokepon/assets/trueno.jpg");
+   height: 100px;
 }
