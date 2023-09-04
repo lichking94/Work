@@ -4,21 +4,12 @@
 const reiniciarjuego = document.getElementById('reiniciar')
 const sectionSeleccionarAtaque =  document.getElementById('ataque')
 const botonMascota = document.getElementById("boton-mascota");
-const botonFuego = document.getElementById("boton-fuego");
-const botonTierra = document.getElementById("boton-tierra");
-const botonAgua = document.getElementById("boton-agua");
-const botonAire = document.getElementById("boton-aire");
 const botonReiniciar = document.getElementById('reiniciar')
 
 // Segundo conjunto de variablesconst
 const setcionSeleccionarMascota = document.getElementById('mascota')
 //let sectionSeleccionarAtaque =  document.getElementById('ataque')
-const animal1 = document.getElementById("caliope");
-const animal2 = document.getElementById("rocoso");
-const animal3 = document.getElementById("firedar");
-const animal4 = document.getElementById("vulcano");
-const animal5 = document.getElementById("pantano");
-const animal6 = document.getElementById("rocmag");
+
 const spanMascotaJugador = document.getElementById("mascota-jugador");
 
 //Tercer conjunto de variables
@@ -34,6 +25,7 @@ const sectionMensajes = document.getElementById('resultado')
 const ataqueDelJugador = document.getElementById('ataque-jugador')
 const ataquesDelEnemigo = document.getElementById('ataque-enemigo')
 const contenedorTarjetas = document.getElementById('contenedortarjetas')
+const poderesDragones = document.getElementById('poderesDragones')
 
 
 //Sexto conjunto de variables
@@ -50,9 +42,21 @@ let ataqueEnemigo;
 let resultado;
 let vidasJugador = 6
 let vidasEnemigo = 6
+let dragonJugador
 let victoria = 0
 let derrota = 0
-let opcionDragones 
+let opcionDragones
+let opcionPoderes
+let animal1
+let animal2 
+let animal3 
+let animal4 
+let animal5 
+let animal6 
+let botonFuego
+let botonTierra 
+let botonAgua 
+let botonAire 
 
 
 // creacion de clases 
@@ -122,6 +126,7 @@ rocmag.ataques.push(
   {nombre: '🔥', id: 'boton-fuego'},
 )
 
+// array global
 dragones.push(caliope,rocoso,firedar,vulcano,pantano,rocmag)
 
 
@@ -142,7 +147,15 @@ function iniciarJuego() {
       </label>
       `
       contenedorTarjetas.innerHTML += opcionDragones
-      console.log(contenedorTarjetas)
+      
+         animal1 = document.getElementById("Caliope");
+         animal2 = document.getElementById("Rocoso");
+         animal3 = document.getElementById("Firedar");
+         animal4 = document.getElementById("Vulcano");
+         animal5 = document.getElementById("Pantano");
+         animal6 = document.getElementById("Rocmag"); 
+
+
   })
 
   //let sectionSeleccionarAtaque =  document.getElementById('ataque') se repite
@@ -186,37 +199,49 @@ function seleccionarMascotaJugador() {
     let imagen = document.createElement("img");
 
   if (animal1.checked) {
-    spanMascotaJugador.innerHTML = "caliope";
+    spanMascotaJugador.innerHTML = animal1.id;
+    dragonJugador = animal1.id
+    console.log(dragonJugador)
     imagen.src = "/mokepon/assets/caliope.jpg";
     imagen.width = 300;
     imagen.height = 300;
     document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal2.checked) {
-    spanMascotaJugador.innerHTML = "rocoso";
+    spanMascotaJugador.innerHTML = animal2.id;
+    dragonJugador = animal2.id
+    console.log(dragonJugador)
     imagen.width = 300;
     imagen.height = 300;
     imagen.src = "/mokepon/assets/rocoso.jpg";
     document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal3.checked) {
-    spanMascotaJugador.innerHTML = "firedar";
+    spanMascotaJugador.innerHTML = animal3.id;
+    dragonJugador = animal3.id
+    console.log(dragonJugador)
     imagen.src = "/mokepon/assets/firedar.jpg";
     imagen.width = 300;
     imagen.height = 300;
     document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal4.checked) {
-    spanMascotaJugador.innerHTML = "vulcano";
+    spanMascotaJugador.innerHTML = animal4.id;
+    dragonJugador = animal4.id
+    console.log(dragonJugador)
     imagen.src = "/mokepon/assets/vulcano.jpg";
     imagen.width = 300;
     imagen.height = 300;
     document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal5.checked) {
-    spanMascotaJugador.innerHTML = "pantano";
+    spanMascotaJugador.innerHTML = animal5;
+    dragonJugador = animal5.id
+    console.log(dragonJugador)
     imagen.src = "/mokepon/assets/pantano.jpg";
     imagen.width = 300;
     imagen.height = 300;
     document.getElementById("imagen-mascota-jugador").appendChild(imagen);
   } else if (animal6.checked) {
-    spanMascotaJugador.innerHTML = "rocmag";
+    spanMascotaJugador.innerHTML = animal6.id;
+    dragonJugador = animal6.id
+    console.log(dragonJugador)
     imagen.src = "/mokepon/assets/rocmag.jpg";
     imagen.width = 300;
     imagen.height = 300;
@@ -228,22 +253,62 @@ function seleccionarMascotaJugador() {
   }
 
   if (animal == 1) {
+    obtenerataques(dragonJugador);
     seleccionarMascotaEnemigo();
   }
+
+
+}
+
+function obtenerataques(dragonJugador){
+  let poderes 
+  for (let i = 0; i < dragones.length; i++) {
+    if (dragonJugador === dragones[i].nombre) {
+      poderes = dragones[i].ataques
+      console.log(poderes)
+    }
+    
+  }
+  mostrarPoderes(poderes)
+}
+
+function mostrarPoderes(poderes){
+  poderes.forEach((poder) => {
+    opcionPoderes =
+    `
+      <button id="${poderes.id}" class="boton-de-ataque">"${ataque.nombre}"</button>
+    `
+    poderesDragones.innerHTML += opcionPoderes
+    console.log(opcionPoderes)
+
+    botonFuego = document.getElementById('boton-fuego')
+    botonAgua = document.getElementById('boton-agua')
+    botonTierra = document.getElementById('boton-tierra')
+    botonAire = document.getElementById('boton-aire')
+  })
+
 }
 
 function seleccionarMascotaEnemigo() {
-  let mascotaAletoria = aleatorio(1, 6);
+  let mascotaAletoria = aleatorio(0, dragones.length -1);
+  console.log(mascotaAletoria)
   
+  
+  spanMascotaEnemigo.innerHTML = dragones[mascotaAletoria].nombre
   let imagen = document.createElement("img");
+  
+  
+  document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
 
-  if (mascotaAletoria == 1) {
-    spanMascotaEnemigo.innerHTML = "caliope";
+
+ /* if (mascotaAletoria == 1) {
+   
     imagen.src = "/mokepon/assets/caliope.jpg";
     imagen.width = 300;
     imagen.height = 300;
-    document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
-  } else if (mascotaAletoria == 2) {
+   
+  } 
+  else if (mascotaAletoria == 2) {
     spanMascotaEnemigo.innerHTML = "rocoso";
     imagen.src = " /mokepon/assets/rocoso.jpg";
     imagen.width = 300;
@@ -273,7 +338,7 @@ function seleccionarMascotaEnemigo() {
     imagen.width = 300;
     imagen.height = 300;
     document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
-  }
+  }*/
 }
 
 function ataqueFuego() {
@@ -425,3 +490,5 @@ function aleatorio(min, max) {
 }
 
 window.addEventListener("load", iniciarJuego);
+
+
