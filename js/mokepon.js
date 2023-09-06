@@ -39,6 +39,7 @@ let reiniciarjuego = document.getElementById('reiniciar')*/
 let dragones = []
 let ataqueJugador = []
 let ataqueEnemigo = []
+let ataqueDragonE = []
 let resultado;
 let vidasJugador = 6
 let vidasEnemigo = 6
@@ -59,6 +60,10 @@ let botonAgua
 let botonAire 
 let botones = {}
 let ataquesDragonEnemigo = []
+let indexJugador
+let indexEnemigo
+let victoriasJugador = 0
+let victoriasEnemigo = 0 
 
 
 // creacion de clases 
@@ -306,26 +311,24 @@ function secuenciaAtque(){
         console.log(ataqueJugador)
         boton.style.background = '#CD4439'
       }
-      
+     ataqueAleatorioEnemigo()  
     })
   })
-  ataqueAleatorioEnemigo()
 }
 
 
 function seleccionarMascotaEnemigo() {
   let mascotaAletoria = aleatorio(0, dragones.length -1);
-  spanMascotaEnemigo.innerHTML = dragones[mascotaAletoria].nombre
-  ataquesDragonEnemigo =  dragones[mascotaAletoria].ataque
-  console.log(ataquesDragonEnemigo)
 
-  let imagen = document.createElement("img");
+  spanMascotaEnemigo.innerHTML = dragones[mascotaAletoria].nombre
+  ataquesDragonEnemigo =  dragones[mascotaAletoria].ataques
+
+let imagen = document.createElement("img");
 if (mascotaAletoria == 0) {
   document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
     imagen.src = "/mokepon/assets/caliope.jpg";
     imagen.width = 300;
-    imagen.height = 300;
-   
+    imagen.height = 300; 
   } 
   else if (mascotaAletoria == 1) {
     spanMascotaEnemigo.innerHTML = "rocoso";
@@ -359,44 +362,80 @@ if (mascotaAletoria == 0) {
     document.getElementById("imagen-mascota-enemigo").appendChild(imagen);
   }
 
-   secuenciaAtque()
+secuenciaAtque()
 }
 
 
 function ataqueAleatorioEnemigo() {
-  let ataqueAleatorio = aleatorio(0, Dragones.length -1);
-  console.log(ataqueAleatorio)
+  let ataqueAleatorio = aleatorio(0, ataquesDragonEnemigo.length -1)
 
   if (ataqueAleatorio == 0  || ataqueAleatorio == 1 ) {
     ataqueEnemigo.push('FUEGO');
-    console.log(ataqueEnemigo)
-  } else if (ataqueAleatorio == 2 || ataqueAleatorio == 3) {
+    
+  }else if (ataqueAleatorio == 2 || ataqueAleatorio == 3) {
     ataqueEnemigo.push("TIERRA");
-    console.log(ataqueEnemigo)
-  } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) {
     
+  } else if (ataqueAleatorio == 3 || ataqueAleatorio == 4) { 
     ataqueEnemigo.push("AGUA");
-    console.log(ataqueEnemigo)
+   
   } else {
-    
     ataqueEnemigo.push("AIRE");
-    console.log(ataqueEnemigo)
+   
+  }
+  console.log(ataqueEnemigo)
+   iniciarbatalla()
   }
 
-    batalla()
+function iniciarbatalla(){
+    if (ataqueJugador.length === 5) {
+      batalla()
+    }
+}
 
-let ataqueEnemigo = []
-     
-
-  }
+function AmbosOponentes(jugador, enemigo){
+  indexJugador = ataqueJugador[jugador]
+  indexEnemigo = ataqueEnemigo[enemigo]
+}
 
 
 function batalla(){
-    
+  for (let index = 0; index < ataqueJugador.length; index++) {
+    if (ataqueJugador[index] === ataqueEnemigo[index]) {
+      AmbosOponentes(index, index)
+      mensajesglobal("EMPATE")
+    }else if (ataqueJugador[index] === 'FUEGO' && ataqueEnemigo[index] === 'TIERRA') {
+      AmbosOponentes(index, index)
+      mensajesglobal("GANASTE")
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+      
+    }else if (ataqueJugador[index] === 'AGUA' && ataqueEnemigo[index] === 'FUEGO') {
+      AmbosOponentes(index, index)
+      mensajesglobal("GANASTE")
+            victoriasJugador++
+            spanVidasJugador.innerHTML = victoriasJugador
+    }else if (ataqueJugador[index] === 'TIERRA' && ataqueEnemigo[index] === 'AIRE') {
+                  AmbosOponentes(index, index)
+                  mensajesglobal("GANASTE")
+                  victoriasJugador++
+                  spanVidasJugador.innerHTML = victoriasJugador
+    }else if (ataqueJugador[index] === 'AIRE' && ataqueEnemigo[index] === 'FUEGO') {
+      AmbosOponentes(index, index)
+      mensajesglobal("GANASTE")
+              victoriasJugador++
+              spanVidasJugador.innerHTML = victoriasJugador
+    }else {
+      AmbosOponentes(index, index)
+      mensajesglobal("PERDISTE")
+      victoriasEnemigo++
+      spanVidasEnemigo.innerHTML = victoriasJugador
+  }
+
+  }
 
    // let spanVidasJugador = document.getElementById("vida-jugador")
   //  let spanVidasEnemigo = document.getElementById("vida-enemigo")
-    
+  /*  
     if (ataqueJugador == ataqueEnemigo) {
         mensajesglobal("EMPATE")
   } else if (ataqueJugador == "FUEGO" && ataqueEnemigo == "TIERRA")
@@ -427,20 +466,22 @@ function batalla(){
         spanVidasJugador.innerHTML = vidasJugador 
         derrota++
           
-  } 
+  } */
      // REVISAR LAS VIDAS 
      revisarvidas()     
 }
 
 function revisarvidas(){
-    if(vidasEnemigo == 0 )
+    if(victoriasJugador ==  victoriasEnemigo )
     {
-       mensajeFinal("FELICIDADES GANASTE ")
+       mensajeFinal("ESTO ES UN EMPATE")
     }
-    else if(vidasJugador == 0)
+    else if(vidasJugador > victoriasEnemigo)
     {
         //vidasJugador - derrota
-        mensajeFinal("LO SIENTO PERDISTE ")
+        mensajeFinal("FELICIDADES GANASTE ")
+    }else{
+      mensajeFinal("LO SIENTO PERDISTE ")
     }
 
 } 
@@ -453,9 +494,10 @@ function mensajesglobal(resultado){
     let nuevoAtaqueDelEnemigo = document.createElement('p')
 
     sectionMensajes.innerHTML = resultado
-    nuevoAtaqueDelJugador.innerHTML = ataqueJugador
-    nuevoAtaqueDelEnemigo.innerHTML = ataqueEnemigo
-
+    nuevoAtaqueDelJugador.innerHTML = indexJugador
+    
+    nuevoAtaqueDelEnemigo.innerHTML = indexEnemigo
+    
     //let mensaje = document.createElement('p')
     //mensaje.innerHTML = 'Tu mascota ataco con ' + ataqueJugador +  ', la mascota del enemigo ataco con ' + ataqueEnemigo + ' ' + resultado 
 
