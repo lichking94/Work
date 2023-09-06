@@ -298,18 +298,22 @@ function secuenciaAtque(){
         ataqueJugador.push('FUEGO')
         console.log(ataqueJugador)
         boton.style.background = '#CD4439'
+        boton.disabled = true
       }else if (e.target.textContent === '💧') {
         ataqueJugador.push('AGUA')
         console.log(ataqueJugador)
         boton.style.background = '#CD4439'
+        boton.disabled = true
       }else if(e.target.textContent === '🌬️'){
         ataqueJugador.push('VIENTO')
         console.log(ataqueJugador)
         boton.style.background = '#CD4439'
+        boton.disabled = true
       }else{
         ataqueJugador.push('TIERRA')
         console.log(ataqueJugador)
         boton.style.background = '#CD4439'
+        boton.disabled = true
       }
      ataqueAleatorioEnemigo()  
     })
@@ -368,7 +372,21 @@ secuenciaAtque()
 
 function ataqueAleatorioEnemigo() {
   let ataqueAleatorio = aleatorio(0, ataquesDragonEnemigo.length -1)
+  let ataque = ataquesDragonEnemigo[ataqueAleatorio].nombre
 
+  ataquesDragonEnemigo.splice(ataqueAleatorio, 1);
+
+  if (ataque == "🔥") {
+    ataqueEnemigo.push("FUEGO");
+  } else if (ataque == "💧") {
+    ataqueEnemigo.push("AGUA");
+  } else if (ataque == "🌬️") {
+    ataqueEnemigo.push("AIRE");
+  }else{
+    ataqueEnemigo.push("TIERRA");
+  }
+
+  /*
   if (ataqueAleatorio == 0  || ataqueAleatorio == 1 ) {
     ataqueEnemigo.push('FUEGO');
     
@@ -379,13 +397,13 @@ function ataqueAleatorioEnemigo() {
     ataqueEnemigo.push("AGUA");
    
   } else {
-    ataqueEnemigo.push("AIRE");
-   
+    ataqueEnemigo.push("AIRE");*/
+    iniciarbatalla()
   }
-  console.log(ataqueEnemigo)
-   iniciarbatalla()
-  }
-
+  
+ 
+  
+console.log(ataqueEnemigo)
 function iniciarbatalla(){
     if (ataqueJugador.length === 5) {
       batalla()
@@ -407,30 +425,29 @@ function batalla(){
       AmbosOponentes(index, index)
       mensajesglobal("GANASTE")
             victoriasJugador++
-            spanVidasJugador.innerHTML = victoriasJugador
-      
     }else if (ataqueJugador[index] === 'AGUA' && ataqueEnemigo[index] === 'FUEGO') {
       AmbosOponentes(index, index)
       mensajesglobal("GANASTE")
             victoriasJugador++
-            spanVidasJugador.innerHTML = victoriasJugador
     }else if (ataqueJugador[index] === 'TIERRA' && ataqueEnemigo[index] === 'AIRE') {
                   AmbosOponentes(index, index)
                   mensajesglobal("GANASTE")
                   victoriasJugador++
-                  spanVidasJugador.innerHTML = victoriasJugador
+    
     }else if (ataqueJugador[index] === 'AIRE' && ataqueEnemigo[index] === 'FUEGO') {
       AmbosOponentes(index, index)
       mensajesglobal("GANASTE")
-              victoriasJugador++
-              spanVidasJugador.innerHTML = victoriasJugador
+              victoriasJ          
     }else {
       AmbosOponentes(index, index)
       mensajesglobal("PERDISTE")
       victoriasEnemigo++
-      spanVidasEnemigo.innerHTML = victoriasJugador
+      
   }
-
+    spanVidasJugador.innerHTML = victoriasJugador
+    spanVidasEnemigo.innerHTML = victoriasEnemigo
+    console.log(victoriasEnemigo)
+    console.log(victoriasJugador)
   }
 
    // let spanVidasJugador = document.getElementById("vida-jugador")
@@ -472,11 +489,11 @@ function batalla(){
 }
 
 function revisarvidas(){
-    if(victoriasJugador ==  victoriasEnemigo )
+    if(victoriasJugador ===  victoriasEnemigo)
     {
        mensajeFinal("ESTO ES UN EMPATE")
     }
-    else if(vidasJugador > victoriasEnemigo)
+    else if(victoriasJugador > victoriasEnemigo)
     {
         //vidasJugador - derrota
         mensajeFinal("FELICIDADES GANASTE ")
@@ -513,16 +530,16 @@ function mensajeFinal(resultadoFinal){
     //sectionMensajes.appendChild(mensaje)
 
     //let botonFuego = document.getElementById("boton-fuego");
-    botonFuego.disabled = true
+    //botonFuego.disabled = true
 
     //let botonTierra = document.getElementById("boton-tierra");//
-    botonTierra.disabled = true
+    //botonTierra.disabled = true
 
     //let botonAgua = document.getElementById("boton-agua");////
-    botonAgua.disabled = true
+    //botonAgua.disabled = true
 
     //let botonAire = document.getElementById("boton-aire");//////
-    botonAire.disabled = true
+    //botonAire.disabled = true
 
    //let reiniciarjuego = document.getElementById('reinicia//////r')//
     reiniciarjuego.style.display = 'block'
