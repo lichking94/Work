@@ -26,6 +26,9 @@ const ataqueDelJugador = document.getElementById('ataque-jugador')
 const ataquesDelEnemigo = document.getElementById('ataque-enemigo')
 const contenedorTarjetas = document.getElementById('contenedortarjetas')
 const poderesDragones = document.getElementById('poderesDragones')
+const sectionVerMapa = document.getElementById('ver-mapa')
+const mapa = document.getElementById("mapa")
+const accionesdragon = document.getElementById('accionesdragon')
 
 
 //Sexto conjunto de variables
@@ -44,6 +47,7 @@ let resultado;
 let vidasJugador = 6
 let vidasEnemigo = 6
 let dragonJugador
+let dragonJugadorObjeto
 let victoria = 0
 let derrota = 0
 let opcionDragones
@@ -64,28 +68,56 @@ let indexJugador
 let indexEnemigo
 let victoriasJugador = 0
 let victoriasEnemigo = 0 
+let lienzo = mapa.getContext("2d")
+let intervalo
+let mapaBackground = new Image()
+mapaBackground.src = '/mokepon/assets/mapadragon.jpg'
 
 
 // creacion de clases 
 
 class Dragones{
-    constructor(nombre, foto, vida){
+    constructor(nombre, foto, vida, fotoMapa, x = 10, y = 10 ){
       this.nombre  = nombre
       this.foto = foto
       this.vida = vida
       this.ataques = []
+      this.x  = x
+      this.y = y
+      this.ancho = 80
+      this.alto= 80
+      this.mapaFoto =new Image()
+      this.mapaFoto.src = fotoMapa
+      this.velocidadX = 0
+      this.velocidadY = 0
     }
-
+    pintarDragon() {
+      lienzo.drawImage(
+        this.mapaFoto,
+        this.x,
+        this.y,
+        this.ancho,
+        this.alto)
+      
+    }
 
 }
 
-let caliope = new Dragones('Caliope', '/mokepon/assets/caliope.jpg', '6')
-let rocoso = new Dragones('Rocoso', '/mokepon/assets/rocoso.jpg', '6')
-let firedar = new Dragones('Firedar', '/mokepon/assets/firedar.jpg','6')
-let vulcano = new Dragones('Vulcano', '/mokepon/assets/vulcano.jpg','6')
-let pantano = new Dragones('Pantano', '/mokepon/assets/pantano.jpg','6')
-let rocmag = new Dragones('Rocmag', '/mokepon/assets/rocmag.jpg','6')
+let caliope = new Dragones('Caliope', '/mokepon/assets/caliope.jpg', '6', '/mokepon/assets/cabezacaliope.jpg')
+let rocoso = new Dragones('Rocoso', '/mokepon/assets/rocoso.jpg', '6','/mokepon/assets/cabezarocoso.jpg')
+let firedar = new Dragones('Firedar', '/mokepon/assets/firedar.jpg','6','/mokepon/assets/cabezafiredar.jpg')
+let vulcano = new Dragones('Vulcano', '/mokepon/assets/vulcano.jpg','6','/mokepon/assets/cabezavulcano.jpg')
+let pantano = new Dragones('Pantano', '/mokepon/assets/pantano.jpg','6','/mokepon/assets/cabezapantano.jpg')
+let rocmag = new Dragones('Rocmag', '/mokepon/assets/rocmag.jpg','6','/mokepon/assets/cabezarocmag.jpg')
 
+
+
+let caliopeEnemigo = new Dragones('Caliope', '/mokepon/assets/caliope.jpg', '6', '/mokepon/assets/cabezacaliope.jpg',500 ,100)
+let rocosoEnemigo = new Dragones('Rocoso', '/mokepon/assets/rocoso.jpg', '6','/mokepon/assets/cabezarocoso.jpg', 500 , 200)
+let firedarEnemigo = new Dragones('Firedar', '/mokepon/assets/firedar.jpg','6','/mokepon/assets/cabezafiredar.jpg', 500, 300)
+let vulcanoEnemigo = new Dragones('Vulcano', '/mokepon/assets/vulcano.jpg','6','/mokepon/assets/cabezavulcano.jpg',500,400)
+let pantanoEnemigo = new Dragones('Pantano', '/mokepon/assets/pantano.jpg','6','/mokepon/assets/cabezapantano.jpg', 500, 500)
+let rocmagEnemigo = new Dragones('Rocmag', '/mokepon/assets/rocmag.jpg','6','/mokepon/assets/cabezarocmag.jpg', 500,600)
 
 caliope.ataques.push(
   {nombre: '💧', id: 'boton-agua'},
@@ -143,6 +175,8 @@ dragones.push(caliope,rocoso,firedar,vulcano,pantano,rocmag)
 function iniciarJuego() {
     //let reiniciarjuego = document.getElementById('reiniciar') se repite
   reiniciarjuego.style.display = 'none' 
+  sectionVerMapa.style.display = 'none'
+  accionesdragon.style.display = 'none'
     
   dragones.forEach((dragon) =>{
       opcionDragones = `
@@ -190,9 +224,9 @@ function seleccionarMascotaJugador() {
 
    // let setcionSeleccionarMascota = document.getElementById('mascota')
     setcionSeleccionarMascota.style.display = 'none'     
-
+   
      // let sectionSeleccionarAtaque =  document.getElementById('ataque')
-    sectionSeleccionarAtaque.style.display = 'flex'
+    
     
     //let animal1 = document.getElementById("caliope");
     //let animal2 = document.getElementById("rocoso");
@@ -257,7 +291,9 @@ function seleccionarMascotaJugador() {
     obtenerataques(dragonJugador);
     seleccionarMascotaEnemigo();
   }
-
+  sectionVerMapa.style.display = 'flex'
+  accionesdragon.style.display = 'flex'
+  iniciamapa()
 
 }
 
@@ -554,6 +590,125 @@ function aleatorio(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
+
+function pintarcanvas(){
+
+  dragonJugadorObjeto.x = dragonJugadorObjeto.x + dragonJugadorObjeto.velocidadX
+  dragonJugadorObjeto.y = dragonJugadorObjeto.y + dragonJugadorObjeto.velocidadY
+  lienzo.clearRect(0,0,mapa.width,mapa.height)
+  lienzo.drawImage(
+    mapaBackground,
+    0,
+    0,
+    mapa.width,
+    mapa.height
+  )
+  dragonJugadorObjeto.pintarDragon()
+  caliopeEnemigo.pintarDragon()
+  rocosoEnemigo.pintarDragon()
+  firedarEnemigo.pintarDragon()
+  vulcanoEnemigo.pintarDragon()
+  pantanoEnemigo.pintarDragon()
+  rocmagEnemigo.pintarDragon()
+
+  if(dragonJugadorObjeto.velocidadX !== 0 || dragonJugadorObjeto.velocidadY !== 0 ) {
+    revisarColision (caliopeEnemigo)
+    revisarColision (rocosoEnemigo)
+    revisarColision (firedarEnemigo)
+    revisarColision (vulcanoEnemigo)
+    revisarColision (pantanoEnemigo)
+    revisarColision (rrocmagEnemigo)
+    
+  }
+
+}
+function moverCaliopex(){
+  dragonJugadorObjeto.velocidadX = 5
+ 
+}
+function moverCaliopey(){
+  dragonJugadorObjeto.velocidadY = -5
+ 
+}
+function moverCaliopeyy(){
+  dragonJugadorObjeto.velocidadY =  5
+  
+ 
+}
+function moverCaliopexx(){
+  dragonJugadorObjeto.velocidadX = -5
+ 
+}
+
+function detenerMovimiento(){
+  dragonJugadorObjeto.velocidadX = 0
+  dragonJugadorObjeto.velocidadY = 0
+}
+
+function presionarunaTecla(){
+  switch (event.key) {
+    case 'ArrowUp':
+      moverCaliopey()
+      break;
+    case 'ArrowRight':
+      moverCaliopex()
+      break;
+    case 'ArrowLeft':
+      moverCaliopexx()
+      break;
+      case 'ArrowDown':
+      moverCaliopeyy()
+      break;
+    default:
+      break;
+  }
+}
+
+function obtenerobjetodragon(){
+  for (let i = 0; i < dragones.length; i++) {
+    if (dragonJugador === dragones[i].nombre) {
+      console.log (dragones[i] ) 
+      return dragones[i] 
+    }
+    
+  }
+}
+
+function iniciamapa(){
+    mapa.width = 800
+    mapa.height = 800
+    dragonJugadorObjeto = obtenerobjetodragon(dragonJugador)
+    intervalo = setInterval(pintarcanvas, 50)
+    window.addEventListener('keydown', presionarunaTecla)
+    window.addEventListener('keyup', detenerMovimiento)
+}
+
+function revisarColision (enemigo) {
+  const arribaEnemigo = enemigo.y +25
+  const abajoEnemigo = enemigo.y + enemigo.altura -25
+  const derechaEnemigo = enemigo.x + enemigo.ancho -25
+  const izquierdaEnemigo = enemigo.x +25
+
+  const arribaMascota = dragonJugadorObjeto.y
+  const abajoMascota = dragonJugadorObjeto.y + dragonJugadorObjeto.altura
+  const derechaMascota = dragonJugadorObjeto.x +dragonJugadorObjeto.ancho
+  const izquierdaMascota = dragonJugadorObjeto.x
+  console.log(dragonJugadorObjeto.x)
+    if (
+      abajoMascota < arribaEnemigo ||
+      arribaMascota > abajoEnemigo ||
+      derechaMascota < izquierdaEnemigo ||
+      izquierdaMascota > derechaEnemigo
+    ) 
+    {
+      return;
+    }
+    detenerMovimiento()
+     // alert("Hay colision " + enemigo.nombre)
+     sectionSeleccionarAtaque.style.display = 'flex'
+     sectionVerMapa.style.display = 'none'
+  
+}
 window.addEventListener("load", iniciarJuego);
 
 

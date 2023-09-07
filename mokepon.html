@@ -30,7 +30,25 @@
    
     <button id="boton-mascota">Seleccionar</button>
   </section>
-
+  <div>
+    <section id="ver-mapa">
+      <h3 class="titulo"> Recorre el mapa con tu dragon</h3>
+      <canvas id="mapa""></canvas>
+    </section>
+  </div>
+   <div>
+    <section id="accionesdragon">  
+      <button onmouseout="detenerMovimiento()" onmousedown="moverCaliopex()" class="reiniciar-juego">IMPULSAR</button>
+      <button onmouseout="detenerMovimiento()" onmousedown="moverCaliopey()" class="reiniciar-juego">ELEVAR</button>
+      <button onmouseout="detenerMovimiento()" onmousedown="moverCaliopeyy()" class="reiniciar-juego">DESCENDER</button>
+      <button onmouseout="detenerMovimiento()" onmousedown="moverCaliopexx()" class="reiniciar-juego">RETROCEDER</button>
+    </section>
+     
+  </div>
+    
+  
+  
+     
 
     <section id="ataque">
 
@@ -42,22 +60,14 @@
 
 
       </div>
- 
-         
-        
         <section id="mensajes"> 
           <p id="resultado" >EMPIEZA EL JUEGO</p> 
 
           <section id="reiniciar">
             <button id="boton-reiniciar" class="reiniciar-juego">Reiniciar</button>
             </section>
-  
-  
         </section>
         
-       
-
-
       <div class="ataques">
 
         <div class="jugador-opciones">
